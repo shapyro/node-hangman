@@ -31,45 +31,13 @@ Word.prototype.splitter = function() {
 Word.prototype.guess = function(char) {
   var guessedSoFar = false;
   for (var i=0; i<this.letterArray.length; i++) {
-    // console.log("word.js | line 52 | " + this.letterArray[i]);
-    // console.log(this.letterArray[i].check(char));
     if (this.letterArray[i].check(char)) {
       guessedSoFar = true;
-    }
+    } 
   }
-  // console.log(this);
   return guessedSoFar;
-  // for (var i=0; i<this.letterArray.length; i++) {
-  //   //don't do this! Example, will return too early and won't finish the loop
-  //   // var newGuess = new Letter(char);
-  //   if (this.letterArray[i].check()) {
-  //     console.log("something happened");
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // };
 };
-// };
 
-// //just for example
-// var someCondition = false;
-
-// var word = "hello";
-
-//pattern for returning whether we got true at least once,
-// without stopping your loop
-// var guessedSoFar = false;
-// for (var i=0; i<this.letterArray.length; i++) {
-// 	if (this.letterArray[i].check()) {
-// 		guessedSoFar = true;
-// 		// do some other stuff, maybe
-// 	} else {
-// 		//do some other stuff, maybe
-// 	}
-
-// }
-// return guessedSoFar;
 
 module.exports = Word;
 
