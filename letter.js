@@ -3,7 +3,8 @@ const Word = require('./word.js');
 
 function Letter(char) {
 	this.char = char;
-	this.guess = false;
+  this.guess = false;
+  
 
 	// returns blank or this letter, depending whether they guessed it so far
 	this.blank = function() {
@@ -16,10 +17,14 @@ function Letter(char) {
 
 	// tells us whether a guess is correct
 	this.check = function(char) {
+    console.log("letters.js | line20 | " + this.char);
+    console.log("letters.js | line21 | " + char);
 		if (char === this.char) {
-			this.guess = true;
+      this.guess = true;
+      console.log("match!")
 			return true;
 		} else {
+      console.log("wrong")
 			return false;
 		}
 	}
