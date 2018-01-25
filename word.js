@@ -6,21 +6,12 @@ var newLetter;
 function Word(word) {
 	this.word = word;
   this.letterArray = [];
-
+  //  build the letter array
   for  (var i=0; i<this.word.length; i++) {
     newLetter = new Letter(this.word[i]);
     this.letterArray.push(newLetter);
   }
 };
-
-// Word.prototype.getLetters = function() {
-//   // push each letter of the word into the letterArray
-//   //  look into changing this to .map(foo => bar) ES6
-//   for  (var i=0; i<this.word.length; i++) {
-//     newLetter = new Letter(this.word[i]);
-//     this.letterArray.push(newLetter.char);
-//   }
-// };
 
 // shows either blanks or letters for the whole word
 // call .check() on each letter in this.letterArray
@@ -40,12 +31,13 @@ Word.prototype.splitter = function() {
 Word.prototype.guess = function(char) {
   var guessedSoFar = false;
   for (var i=0; i<this.letterArray.length; i++) {
-    console.log("word.js | line 52 | " + this.letterArray[i]);
-    console.log(this.letterArray[i].check(char));
+    // console.log("word.js | line 52 | " + this.letterArray[i]);
+    // console.log(this.letterArray[i].check(char));
     if (this.letterArray[i].check(char)) {
       guessedSoFar = true;
     }
   }
+  // console.log(this);
   return guessedSoFar;
   // for (var i=0; i<this.letterArray.length; i++) {
   //   //don't do this! Example, will return too early and won't finish the loop

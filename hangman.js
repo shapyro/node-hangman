@@ -51,21 +51,37 @@ Game.prototype.guessALetter = function() {
     .then(function (answer) {
       console.log("inquirer input = " + answer.guess);
       hangman.guessCount--;
+      console.log("You have " + hangman.guessCount + " guesses remaining.")
       hangman.currentWord.guess(answer.guess);
       if (hangman.isPlaying  && hangman.guessCount !== 0) {
         // hangman.wins++;
         // console.log("You have " + hangman.wins + " wins!")
         console.log(hangman.currentWord.splitter());
-        console.log(hangman.currentWord.splitter().trim());
-        console.log("still playing");
+        // console.log(hangman.currentWord.splitter().trim());
+        hangman.checkWin();
         hangman.guessALetter();
       } else if (hangman.guessCount === 0) { // } || hangman.currentWord === hangman.currentWord.splitter().trim()) {
         hangman.playAgain();
         // this.playAgain();
       }
     });
+
 };
 
+
+Game.prototype.checkWin = function () {
+  // console.log(hangman.currentWord)
+  var correctGuessCount = [];
+  for (var i = 0; i<hangman.currentWord.letterArray.length; i++) {
+    if (hangman.currentWord.letterArray[i].guess === true) {
+      correctGuessCount.push(hangman.currentWord.letterArray[i].guess);
+    }
+  }
+  if (hangman.currentWord.letterArray.length === correctGuessCount.length) {
+    console.log("YOU WIN!");
+  }
+  console.log(correctGuessCount);
+};
 
 
 // Game.prototype.validateGuess = function(value) {
@@ -101,19 +117,12 @@ Game.prototype.playAgain = function() {
         hangman.endGame();
       }
     });
-    //   response =>
-    //     response.confirm
-    //       ? hangman
-    //           //.reset()
-    //           .guessCount = 10
-    //           .pickWord()
-    //           .guessALetter()
-    //       : hangman.endGame()
-    // );
+
 };
 
 Game.prototype.endGame = function() {
   console.log("game over");
+  console.log("Wins: " + hangman.wins)
 }
 
 const run = function() {
