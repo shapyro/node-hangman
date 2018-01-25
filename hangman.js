@@ -19,8 +19,8 @@ const Game = function() {
   this.wins = 0;
   this.losses = 0;
   this.guessCount = 10;
-  this.guesses = [];
-  this.word = {};
+  // this.guesses = [];
+  // this.word = {};
   this.isPlaying = true;
 };
 
@@ -50,17 +50,23 @@ Game.prototype.guessALetter = function() {
     ])
     .then(function (answer) {
       console.log("inquirer input = " + answer.guess);
+      hangman.guessCount--;
       hangman.currentWord.guess(answer.guess);
-      if (hangman.isPlaying) {
+      if (hangman.isPlaying  && hangman.guessCount !== 0) {
+        // hangman.wins++;
+        // console.log("You have " + hangman.wins + " wins!")
         console.log(hangman.currentWord.splitter());
+        console.log(hangman.currentWord.splitter().trim());
         console.log("still playing");
         hangman.guessALetter();
-      } else {
-        console.log("something went wrong");
+      } else if (hangman.guessCount === 0) { // } || hangman.currentWord === hangman.currentWord.splitter().trim()) {
+        hangman.playAgain();
         // this.playAgain();
       }
     });
 };
+
+
 
 // Game.prototype.validateGuess = function(value) {
 //   if (value.length === 1) {
@@ -76,26 +82,39 @@ Game.prototype.guessALetter = function() {
 //   }
 // };
 
-// Game.prototype.playAgain = function() {
-//   const _this = this;
-//   inquirer
-//     .prompt([
-//       {
-//         name: 'confirm',
-//         type: 'confirm',
-//         message: 'Do you want to play again?'
-//       }
-//     ])
-//     .then(
-//       response =>
-//         response.confirm
-//           ? _this
-//               .reset()
-//               .pickWord()
-//               .guessALetter()
-//           : _this.endGame()
-//     );
-// };
+Game.prototype.playAgain = function() {
+  // const _this = this;
+  inquirer
+    .prompt([
+      {
+        name: 'confirm',
+        type: 'confirm',
+        message: 'Do you want to play again?'
+      }
+    ])
+    .then(function (response) {
+      if (response.confirm) {
+        hangman.guessCount = 10
+        hangman.pickWord();
+        hangman.guessALetter();
+      } else {
+        hangman.endGame();
+      }
+    });
+    //   response =>
+    //     response.confirm
+    //       ? hangman
+    //           //.reset()
+    //           .guessCount = 10
+    //           .pickWord()
+    //           .guessALetter()
+    //       : hangman.endGame()
+    // );
+};
+
+Game.prototype.endGame = function() {
+  console.log("game over");
+}
 
 const run = function() {
   hangman = new Game();
@@ -104,4 +123,6 @@ const run = function() {
 };
 
 run();
+
+
 

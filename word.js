@@ -27,20 +27,11 @@ function Word(word) {
 // re-join together the results from each of those calls
 // either return or log the result
 Word.prototype.splitter = function() {
-  // this.addBlank = new Letter();
-  // this.makeBlanks = function(){
-  //   this.letterArray.map(l=>addBlank.blank(l))
-  // }
-  // addBlank.blank(this.letterArray.map(l=>'_'));
   var storedWord = [];
   for (var i = 0; i < this.letterArray.length; i++) {
     storedWord.push(this.letterArray[i].blank());
   }
   return storedWord.join(' ');
-  // this.blanks = this.letterArray.map(l=>'_')
-  // console.log("[word.js line 28]: " + this.blanks);
-  // var word = '_ _ l l';
-  // console.log(word);
 };
 
 // call the check() function on EACH letter in this.letterArray
@@ -51,7 +42,7 @@ Word.prototype.guess = function(char) {
   for (var i=0; i<this.letterArray.length; i++) {
     console.log("word.js | line 52 | " + this.letterArray[i]);
     console.log(this.letterArray[i].check(char));
-    if (this.letterArray[i].check()) {
+    if (this.letterArray[i].check(char)) {
       guessedSoFar = true;
     }
   }
