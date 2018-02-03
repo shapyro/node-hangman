@@ -35,6 +35,7 @@ Word.prototype.guess = function(char) {
       guessedSoFar = true;
     } 
   }
+  //if (guessedSoFar) // log correct or incorrect
   return guessedSoFar;
 };
 

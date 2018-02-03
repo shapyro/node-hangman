@@ -41,7 +41,11 @@ Game.prototype.guessALetter = function() {
     ])
     .then(function (answer) {
       console.log("You have " + hangman.guessCount + " guesses remaining.")
-      hangman.currentWord.guess(answer.guess);
+      if(hangman.currentWord.guess(answer.guess)) {
+        console.log("correct")
+      } else {
+        console.log("incorrect")
+      }
       if (hangman.isPlaying  && hangman.guessCount !== 0) {
         console.log(hangman.currentWord.splitter());
         console.log('\n');
@@ -118,7 +122,7 @@ Game.prototype.endGame = function() {
   console.log("game over")
   console.log("Wins: " + hangman.wins)
   console.log("Losses: " + hangman.losses)
-  console.log("Thanks for playing!");
+  console.log('Thanks for playing!'.zebra);
 };
 
 const run = function() {
