@@ -1,2 +1,4 @@
 # node-hangman
-hangman game for node
+hangman game in node
+
+![](hangmanGame.gif)
